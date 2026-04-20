@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel, Field
@@ -9,7 +9,7 @@ notes: dict[str, "Note"] = {}
 class NoteCreate(BaseModel):
     title: str = Field(..., min_length=1, max_length=100, description="Заголовок заметки")
     content: str = Field(..., min_length=1, max_length=1000, description="Текст заметки")
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone(timedelta(hours=3))))
 
 class Note(NoteCreate):
      id: str
