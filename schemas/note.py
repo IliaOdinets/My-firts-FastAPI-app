@@ -16,8 +16,8 @@ class NoteCreate(BaseModel):
         return v.strip().title()
 
     @model_validator(mode="after")
-    def check_content_not_dublicates_title(self) -> Self:
-        if self.content.lower().strip() == self.title.lower().stip():
+    def check_content_not_duplicates_title(self) -> Self:
+        if self.content.lower().strip() == self.title.lower().strip():
             raise ValueError("Содержимое не должно дублировать заголовок")
         return self
 

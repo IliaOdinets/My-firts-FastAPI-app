@@ -13,7 +13,6 @@ app = FastAPI(
 # Подключаем роутеры
 app.include_router(api_router, prefix="/api/v1")
 
-notes: dict[str, "Note"] = {}
 
 @app.get("/", tags=["Root"])
 def health_check():
