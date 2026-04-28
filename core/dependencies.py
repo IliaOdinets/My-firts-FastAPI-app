@@ -1,16 +1,8 @@
-from typing import Annotated
+from typing import AsyncGenerator
 
-from fastapi import Depends, HTTPException, status
-from schemas.note import NoteInDB
+from sqlalchemy.ext.asyncio import AsyncSession
+from db.session import async_session_factory
 
-async def get_note_or_404(note_id: str) -> NoteInDB:
-    from services.note_service import notes # type: ignore
-    note = notes.get(note_id) # type: ignore
-    if not note:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Note not found"
-        )
-    return note # type: ignore
-
-NoteIDDep = Annotated[str, Depends(get_note_or_404)]
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    async with async_session_factory() as session:
+        yield session
