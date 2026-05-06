@@ -21,7 +21,9 @@ async def get_all_notes(db: AsyncSession) -> list[Note]:
     return list(result.scalars().all())
 
 async def get_note_by_id(db: AsyncSession, note_id: str) -> Note | None:
-    result = await db.execute(select(Note).where(Note.id == note_id))
+    """Ищет заметку по ID"""
+    stmt = select(Note).where(Note.id == note_id)
+    result = await db.execute(stmt)
     return result.scalar_one_or_none()
 
 async def update_note(db: AsyncSession, note_id: str, note_data: NoteCreate) -> Note | None:

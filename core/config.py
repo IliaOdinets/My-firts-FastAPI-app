@@ -1,6 +1,7 @@
-# core/config.py
+import logging
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(name)s | %(message)s")
 class Settings(BaseSettings):
     DATABASE_URL: str
     AUTH_SECRET_KEY: str

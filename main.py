@@ -13,7 +13,6 @@ app = FastAPI(
 # Подключаем роутеры
 app.include_router(api_router, prefix="/api/v1")
 
-
-@app.get("/", tags=["Root"])
+@app.get("/health", tags=["System"])
 def health_check():
-    return {"status": "ok", "message": "FastAPI is working"}
+    return {"status": "healthy", "version": "0.1.0"}
