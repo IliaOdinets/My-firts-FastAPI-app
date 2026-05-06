@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 # 🔑 2. Импортируем Base и ВСЕ модели. Без этого Alembic не увидит таблицы!
 from db.base import Base
 from models.note import Note  # pyright: ignore[reportUnusedImport] # Явный импорт регистрирует модель в Base.metadata
+from models.user import User
 
 # Alembic Config object
 config = context.config
